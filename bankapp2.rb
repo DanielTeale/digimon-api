@@ -4,7 +4,7 @@ end
 $history = []
 puts "Welcome to my shit bank"
 
-File.open("Balance_history.txt" "r").each do |line|
+File.open("Balance_history.txt", "r").each do |line|
     $history.push (line) 
 end
 
@@ -25,18 +25,21 @@ end
 # Main Loop
 loop do
     answer = whatdo
+
 # Action selector
     if answer == "balance"
         puts "Your balance is $#{$balance}"
     end
+
 # Deposit function
     if answer == "deposit"
         puts "How much do you wish to deposit?"
         deposit = gets.chomp
         $balance = $balance.to_f + deposit.to_f
-        $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + "$#{deposit}")
+        $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + "+$#{deposit}")
         puts "Your new balance is $#{$balance}"
     end
+
 # Withdraw function
     if answer == "withdraw"
         puts "How much do you wish to withdraw?"
@@ -46,26 +49,40 @@ loop do
             puts "Insufficient funds"
         else
             $balance = $balance.to_f - withdraw.to_f
-            $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + " -$#{withdraw}")
+            $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + "-$#{withdraw}")
             puts "Your new balance is $#{$balance}"   
         end
     end
 
+# View history function
     if answer == "history"
-        puts $history
+        $history.each do |line|
+            puts line
+        end
     end
+
 # Continue prompt verifier    
     response = docontinue
     if response != "yes"
         break
-    end
-    
-    File.open("Bank_storage.txt", "w") do |line|
-        line.puts "\r" + "#{$balance}"
-    end
-#FIXME: Unexpected end of input
-    File.open("Balance_history.txt" + "a")
-        line.puts "\r" + "#{$history}"
+    else
+        system('clear')
     end
 
+# Save balance   
+    File.open("Bank_storage.txt", "w") do |line|
+        line.puts "#{$balance}"
+    end
+end
+
+# Clear old transaction history
+File.open("Balance_history.txt", "w") do
+    print ""
+end
+
+# Save transaction history
+$history.each do |x|
+    File.open("Balance_history.txt", "a") do |line|
+        line.puts "#{x}"
+    end
 end
