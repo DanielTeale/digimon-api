@@ -1,21 +1,19 @@
+working_hash = Hash.new
+hash_str = File.open("Bankstorage.txt", "r") do |line|
+#Pull hash string from file
+def pullstr(x)
+    File.open("Bankstorage.txt", "r") do |line|
+        line
+
+
+
+
 # Fetch balance data
 File.open("Bank_storage.txt", "r").each do |line|
     $balance = (line.to_f)
 end
 
-# Find user
-# def find_user
-#     if File.read("Bankhash_storage").include?($user)
-#     # Get user info from hash
-#     else
-#         puts "User does not exist, do you wish to create a new user?"
-        
 
-# store hash in txt
-# ask for user
-# if user not available prompt for new user and create new hash
-# get history and balance from user hash and store them in array and variable
-# save hash to text file
 
 #FIXME: call user loging
 # def login
@@ -26,10 +24,7 @@ end
 
 $history = []
 puts "Welcome to my shit bank"
-$user = login
-sav_user = File.read("Bankhash_storage").include?($user)
-if sav_user do
-    
+
 
 # Fetch transaction history and store in array
 File.open("Balance_history.txt", "r").each do |line|
