@@ -1,4 +1,2 @@
-Balance: $465.0 Transaction: +$50
-Balance: $395.0 Transaction: -$70.0
-Balance: $445.0 Transaction: +$50
-Balance: $245.0 Transaction: -$200.0
+2018-08-24 12:57:29 +1000 Balance: $145.0  | Transaction: +$50
+2018-08-24 12:57:36 +1000 Balance: $95.0  | Transaction: -$50.0

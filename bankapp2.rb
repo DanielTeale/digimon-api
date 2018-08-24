@@ -1,9 +1,37 @@
+# Fetch balance data
 File.open("Bank_storage.txt", "r").each do |line|
     $balance = (line.to_f)
 end
+
+# Find user
+# def find_user
+#     if File.read("Bankhash_storage").include?($user)
+#     # Get user info from hash
+#     else
+#         puts "User does not exist, do you wish to create a new user?"
+        
+
+# store hash in txt
+# ask for user
+# if user not available prompt for new user and create new hash
+# get history and balance from user hash and store them in array and variable
+# save hash to text file
+
+#FIXME: call user loging
+# def login
+#     puts "What is your username?"
+#     username = gets.chomp
+#     username.downcase
+# end
+
 $history = []
 puts "Welcome to my shit bank"
+$user = login
+sav_user = File.read("Bankhash_storage").include?($user)
+if sav_user do
+    
 
+# Fetch transaction history and store in array
 File.open("Balance_history.txt", "r").each do |line|
     $history.push (line) 
 end
@@ -36,7 +64,8 @@ loop do
         puts "How much do you wish to deposit?"
         deposit = gets.chomp
         $balance = $balance.to_f + deposit.to_f
-        $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + "+$#{deposit}")
+        time = Time.now
+        $history.push ("#{time} " + "Balance: " + "$#{$balance} " + " | Transaction: " + "+$#{deposit}")
         puts "Your new balance is $#{$balance}"
     end
 
@@ -49,7 +78,8 @@ loop do
             puts "Insufficient funds"
         else
             $balance = $balance.to_f - withdraw.to_f
-            $history.push ("Balance: " + "$#{$balance} " + "Transaction: " + "-$#{withdraw}")
+            time = Time.now
+            $history.push ("#{time} " + "Balance: " + "$#{$balance} " + " | Transaction: " + "-$#{withdraw}")
             puts "Your new balance is $#{$balance}"   
         end
     end
