@@ -1,9 +1,8 @@
 require_relative 'hashpractice'
 
 # Fetch balance data
-File.open("Bank_storage.txt", "r").each do |line|
-    $balance = (line.to_f)
-end
+users_array = read_file('Balance_history.txt')
+puts users_array
 
 
 $history = []

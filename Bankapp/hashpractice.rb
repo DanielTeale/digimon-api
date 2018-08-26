@@ -9,7 +9,7 @@ def from_json(hash)
 end
 
 def save_file(path, data)
-    File.open(path, 'a') do |f|
+    File.open(path, 'w') do |f|
         f.puts to_json(data)
     end
 end
