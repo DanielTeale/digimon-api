@@ -1,21 +1,40 @@
 require_relative 'hashpractice'
-require_relative 'createuser'
 
-# Fetch balance data
+# Create new file and entry
+def create_user(user)
+    user.downcase!
+    hash = Hash.new
+    hash[:name] = "#{user}"
+    hash[:balance] = 0
+    puts "Please create a password: "
+    hash[:password] = gets.chomp
+    write_to_file("userdata/#{user}.txt",hash)
+    write_to_file("userdata/#{user}_history.txt", "Your history:")
+end
 
+# Fetch data from file and return as hash
+def fetch_data(user)
+    array = read_from_file("userdata/#{user}.txt")
+    array[0]
+end
 
+# Initialise
 $userhash = []
 $history = []
+
+# User log in prompt
 puts "Welcome to my bank"
 puts "Please enter your username: "
 $user = gets.chomp
 $user.downcase!
 
 loop do
+# Pull data from file
     if File.exist?("userdata/#{$user}.txt")
         $userhash = fetch_data($user)
         $balance = $userhash["balance"]
         $history = read_from_file("userdata/#{$user}_history.txt")
+# Verify password
         puts "Please enter your password:"
         $password = gets.chomp
         if $password != $userhash["password"]
@@ -25,6 +44,7 @@ loop do
                 if $password == $userhash["password"]
                     break
                 end
+            end
         if $password != $userhash["password"]
             puts "You have entered the password incorrect too many times"
             abort
@@ -33,6 +53,7 @@ loop do
         end
         break
     else
+# Create user prompt
         puts "User does not exist"
         puts "Do you want to create user?"
         response = gets.chomp
@@ -42,11 +63,6 @@ loop do
         end
     end
 end
-
-# Fetch transaction history and store in array
-# File.open("Balance_history.txt", "r").each do |line|
-#     $history.push (line) 
-# end
 
 # Which action
 def whatdo
@@ -111,8 +127,9 @@ loop do
         system('clear')
     end
 end
+
+# Save user hash to file
 $userhash["balance"] = $balance
 $userhash["history"] = $history
-
 write_to_file("userdata/#{$user}.txt", $userhash)
 append_to_file("userdata/#{$user}_history.txt", $history)
