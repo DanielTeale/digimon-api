@@ -1,1 +1,1 @@
-[[[[{"balance":20,"history":"dicks"}],{"balance":0,"history":""}],{"balance":0,"history":""}],{"balance":0,"history":""}]
+50.0

@@ -1,18 +1,24 @@
 require_relative 'hashpractice'
+require_relative 'createuser'
 
 # Fetch balance data
-users_array = read_file('Balance_history.txt')
-puts users_array
+
 
 
 $history = []
 puts "Welcome to my bank"
+puts "Please enter your username: "
+user = gets.chomp
+user.downcase!
 
+userhash = fetch_data(user)
+$balance = userhash["balance"]
+$history = read_from_file("userdata/#{user}_history.txt")
 
 # Fetch transaction history and store in array
-File.open("Balance_history.txt", "r").each do |line|
-    $history.push (line) 
-end
+# File.open("Balance_history.txt", "r").each do |line|
+#     $history.push (line) 
+# end
 
 # Which action
 def whatdo
@@ -78,19 +84,23 @@ loop do
     end
 
 # Save balance   
-    File.open("Bank_storage.txt", "w") do |line|
-        line.puts "#{$balance}"
-    end
+    # File.open("Bank_storage.txt", "w") do |line|
+    #     line.puts "#{$balance}"
+    # end
 end
+userhash["balance"] = $balance
+userhash["history"] = $history
 
+write_to_file("userdata/#{user}.txt", userhash)
+append_to_file("userdata/#{user}_history.txt", $history)
 # Clear old transaction history
-File.open("Balance_history.txt", "w") do
-    print ""
-end
+# File.open("Balance_history.txt", "w") do
+#     print ""
+# end
 
-# Save transaction history
-$history.each do |x|
-    File.open("Balance_history.txt", "a") do |line|
-        line.puts "#{x}"
-    end
-end
+# # Save transaction history
+# $history.each do |x|
+#     File.open("Balance_history.txt", "a") do |line|
+#         line.puts "#{x}"
+#     end
+# end
