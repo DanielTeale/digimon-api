@@ -1,1 +1,1 @@
-{"name":"daniel","balance":0,"password":"penis"}
+{"name":"daniel","balance":0,"password":"penis","history":[""]}

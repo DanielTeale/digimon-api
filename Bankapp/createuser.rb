@@ -8,7 +8,7 @@ def create_user(user)
     puts "Please create a password: "
     hash[:password] = gets.chomp
     write_to_file("userdata/#{user}.txt",hash)
-    write_to_file("userdata/#{user}_history.txt", "")
+    write_to_file("userdata/#{user}_history.txt", "Your history:")
 end
 
 def fetch_data(user)
