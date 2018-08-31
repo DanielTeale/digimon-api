@@ -9,7 +9,7 @@ def create_user(user)
     puts "Please create a password: "
     hash[:password] = gets.chomp
     write_to_file("userdata/#{user}.txt",hash)
-    write_to_file("userdata/#{user}_history.txt", "Your history:")
+    write_to_file("userdata/#{user}_history.txt", nil)
 end
 
 # Fetch data from file and return as hash
@@ -49,8 +49,7 @@ loop do
             puts "You have entered the password incorrect too many times"
             abort
         end    
-            end
-        end
+      end
         break
     else
 # Create user prompt
@@ -92,7 +91,7 @@ loop do
         puts "How much do you wish to deposit?"
         deposit = gets.chomp
         $balance = $balance.to_f + deposit.to_f
-        time = Time.now
+        time = Time.now.strftime "%d/%m/%Y %I:%m%p:"
         $history.push ("#{time} " + "Balance: " + "$#{$balance} " + " | Transaction: " + "+$#{deposit}")
         puts "Your new balance is $#{$balance}"
     end
