@@ -1,3 +1,5 @@
+require 'rainbow'
+
 #################################################################### ‎(ﾉಥ益ಥ）ﾉ ┻━┻
 #   Requirements =================================================##
 #   - Your application must have a class named Element with      |##

@@ -33,7 +33,7 @@ end
 # +data+:: +Hash+ takes a Hash
 def append_to_file(path, data)
   # See for more on Open method options:  https://ruby-doc.org/core-2.5.1/IO.html#method-c-new
-  File.open(path, 'a') do |f|
+  File.open(path, 'w') do |f|
     f.puts hash_to_json(data)
   end
 end
